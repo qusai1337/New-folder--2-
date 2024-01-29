@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@heroicons/vue@1.0.4"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'brand': '#0d9488',
+                'sidebar': '#034748',
+              },
+              fontFamily: {
+                sans: ['Inter var', 'sans-serif'],
+              },
+            },
+          },
+        }
+      </script>
+      <style>
+        /* Styles for the circular progress bar */
+        .progress-circle {
+          background-color: transparent;
+          border-radius: 50%;
+          display: block;
+          height: 100px;
+          width: 100px;
+          position: relative;
+        }
+  
+        .progress-circle:after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          border: 6px solid #f3f3f3;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+  
+        .progress-circle:before {
+          content: attr(data-percentage) '%';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.5em;
+          color: #4A5568;
+        }
+  
+        .progress-circle .progress-mask {
+          width: 100%;
+          height: 100%;
+          transform: rotate(180deg);
+          position: absolute;
+          clip: rect(0px, 50px, 100px, 0px);
+        }
+  
+        .progress-circle .fill {
+          background: #10b981;
+          border-radius: 50%;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          clip: rect(0px, 50px, 100px, 0px);
+        }
+      </style></head>
+<body class="font-sans bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-16 bg-sidebar flex flex-col items-center py-4">
+            <!-- Logo placeholder -->
+            <div class="h-10 w-10 bg-brand mb-6"></div>
+            <!-- Menu items -->
+            <div class="flex flex-col gap-4">
+                <!-- Replace with your own icons -->
+                <button class="menu-button h-8 w-8 bg-white rounded-full mb-2">
+                    <!-- Academic Cap Icon for Courses -->
+                    <img src="https://s2.svgbox.net/hero-outline.svg?ic=academic-cap&color=000" width="32" height="32">
+                </button>
+                <button class="menu-button h-8 w-8 bg-white rounded-full mb-2">
+                    <!-- Clipboard List Icon for Surveys -->
+                    <img src="https://s2.svgbox.net/hero-outline.svg?ic=clipboard-list&color=000" width="32" height="32">
+                </button>
+                <button class="menu-button h-8 w-8 bg-white rounded-full mb-2">
+                    <!-- Chat Icon for Messages -->
+                    <img src="https://s2.svgbox.net/hero-outline.svg?ic=chat&color=000" width="32" height="32">
+                </button>
+                <button class="menu-button h-8 w-8 bg-white rounded-full">
+                    <!-- Folder Icon for Files -->
+                    <img src="https://s2.svgbox.net/hero-outline.svg?ic=folder&color=000" width="32" height="32">
+                </button>
+                <!-- Add more buttons with icons as needed -->
+            </div>
+        </div>
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Top Bar -->
+            <div class="px-6 py-4 bg-teal-600 flex justify-between items-center">
+                <h1 class="text-white text-lg">Dashboard</h1>
+                <div class="flex items-center">
+                    <div class="bg-white rounded-full w-8 h-8 mr-2"></div>
+                    <span class="text-white">demo nabeel</span>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                <!-- Course Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l-9 5 9 5 9-5-9-5z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">Courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surveys Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l-9 5 9 5 9-5-9-5z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Messages Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l-9 5 9 5 9-5-9-5z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">Courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Files Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l-9 5 9 5 9-5-9-5z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">Courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mediacast Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l-9 5 9 5 9-5-9-5z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">Courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Progress Card -->
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100">
+                            <!-- Icon placeholder -->
+                            <svg class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M13 16h-1v-4h1m0 0h-1V9h1m0 6a2 2 0 001.5-1.75V9a2 2 0 10-3 1.75V15a2 2 0 001.5 1.75M5.5 6.5L7 10m0 0l1.5-3.5L7 10m0 0l-1.5 3.5L7 10m5-1h3m-3 4h2" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-lg font-semibold text-gray-700">My Progress</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repeat for other cards as needed -->
+            </div>
+
+
+           <!-- My Courses & My Risk Profile -->
+    <div class="flex flex-wrap md:flex-nowrap gap-4 p-4">
+        <!-- My Courses Table -->
+        <div class="flex-1 bg-white rounded-lg shadow p-6">
+            <h3 class="font-semibold mb-4">My Courses</h3>
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="text-left font-medium text-gray-500 uppercase tracking-wider py-3">Title</th>
+                        <th class="text-left font-medium text-gray-500 uppercase tracking-wider py-3">Access Date</th>
+                        <th class="text-left font-medium text-gray-500 uppercase tracking-wider py-3">Last Access</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <!-- Data rows -->
+                    <tr>
+                        <td class="py-3 border-b">Intro to Web Design</td>
+                        <td class="py-3 border-b">01/28/2024</td>
+                        <td class="py-3 border-b">01/29/2024</td>
+                    </tr>
+                    <!-- Repeat for other courses -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- My Risk Profile -->
+        <div class="w-full md:w-1/4 bg-white rounded-lg shadow p-6">
+            <h3 class="font-semibold mb-4">My Risk Profile</h3>
+            <div class="relative flex justify-center items-center">
+                <div class="progress-circle" data-percentage="75">
+                  <div class="progress-mask" style="transform: rotate(calc(180deg + (75 * 3.6deg)));">
+                    <div class="fill" style="transform: rotate(180deg); background-color: #10b981;"></div>
+                  </div>
+                  <div class="progress-mask">
+                    <div class="fill" style="transform: rotate(calc(180deg + (75 * 3.6deg))); background-color: #10b981;"></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="bg-gray-800 text-white text-center p-4 text-sm">
+        Powered by Security First (v1.5.7 2023-02-14)
+    </div>
+</body>
+</html>
